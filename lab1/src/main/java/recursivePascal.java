@@ -9,7 +9,6 @@ public class recursivePascal {
 
     // print direction boolean
     public boolean direction = true;
-    public int[][] binom_store;
 
     /*
         calculate (n,k) by using (n,k) == (n-1, k-1) + (n-1, k)
