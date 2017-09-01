@@ -25,17 +25,6 @@ public class recursivePascal {
                 Calculating elements for a too high value of n makes for weird results.
                 As ints have a max value of little over 2 billion they are prone to going over
                 the limit and turning "negative".
-
-                If we disregard this minuscule detail and focus on the number of calculations:
-                We can reduce the number of calculations being made by using an array to store
-                the values calculated for all positions up to half of the elements of the row.
-                If the number of elements on a row is divisible by 2 we can save elements up to
-                numberOfElements/2, if the number of elements is not divisible by 2, instead
-                save numberOfElements/2 rounded up.
-                This should be 17 points
-
-                Another way to do this is by storing all numbers that you have calculated in binom
-                in an array and then check if we have calculated it before
             */
         }
     }
