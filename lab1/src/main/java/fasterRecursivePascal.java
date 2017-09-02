@@ -84,7 +84,7 @@ public class fasterRecursivePascal {
 
 
 /**
- * this below is the slow version as we couldnt hand in more than one file
+ * this below is the slow version as we couldn't hand in more than one file
  */
 /*public class recursivePascal {
 
