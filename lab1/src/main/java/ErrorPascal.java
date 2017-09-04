@@ -1,5 +1,9 @@
 import edu.princeton.cs.introcs.StdOut;
 
+/**
+ Erik Pettersson, erpette@kth.se
+ **/
+
 public class ErrorPascal implements Pascal {
 
     public void printPascal(int n) {
@@ -11,7 +15,7 @@ public class ErrorPascal implements Pascal {
 
     public int binom(int n, int k) {
 
-        if (k < 0 && k > n) {
+        if (k < 0 || k > n) {
             StdOut.println("Illegal value for k, try again.");
         }
         return 0;

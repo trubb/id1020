@@ -1,6 +1,10 @@
 import edu.princeton.cs.introcs.StdOut;
 import edu.princeton.cs.introcs.StdIn;
 
+/**
+ Erik Pettersson, erpette@kth.se
+ **/
+
 public class Driver {
 
     /**
@@ -23,14 +27,16 @@ public class Driver {
             StdOut.println("true = normal (top down), false = upside down (bottom up)");
 
             recursive.direction = StdIn.readBoolean();
+            iterative.direction = recursive.direction;
             recursive.binom_store = new int[n+1][n+1];
+            iterative.iterationarray = new int[n+1][n+1];
 
             StdOut.println("Do you want to run the iterative implementation? Y/n");
             String pick = StdIn.readString();
-            if (pick == "y" || pick == "Y") {
+            if (pick.equals("y") || pick.equals("Y")) {
                 // call printPascal with our n
                 iterative.printPascal(n);
-            } else if (pick == "n" || pick == "N") {
+            } else if (pick.equals("n") || pick.equals("N")) {
                 // call printPascal with our n
                 recursive.printPascal(n);
             } else {

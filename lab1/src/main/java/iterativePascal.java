@@ -1,8 +1,16 @@
 import edu.princeton.cs.introcs.StdOut;
 
+/**
+ * Erik Pettersson, erpette@kth.se
+ *
+ * an iterative implementation of a class that prints Pascal's triangle
+ **/
+
 public class iterativePascal extends ErrorPascal implements Pascal {
 
-    int[][] iterationarray; // for storing values in
+    // print direction boolean
+    public boolean direction = true;
+    int[][] iterationarray; // an array for storing values in
 
     public int binom(int n, int k) {
 
@@ -18,12 +26,32 @@ public class iterativePascal extends ErrorPascal implements Pascal {
 
     public void printPascal(int n) {
 
-        // count rows in array to print
-        for (int i = 0; i <= n; i++) {
-            for (int j = 0; j <= n; j++) {
-                StdOut.print(binom(i,j));
+        // calculate values for the triangle
+        for (int i = 0; i <= n ; i++) {
+            for (int j = 0; j <= i ; j++) {
+                binom(i, j);
             }
-            StdOut.println();
+        }
+
+        // print the values for the triangle from the array
+        if (direction == true) { // if direction is true print topside up
+            // count rows in array to print
+            for (int i = 0; i <= n; i++) {
+                // count columns in array to print
+                for (int j = 0; j <= i; j++) {
+                    StdOut.print(iterationarray[i][j] + " ");
+                }
+                StdOut.println();
+            }
+        } else if (!direction){ // if direction is false print upside down
+            // count rows in array to print
+            for (int i = n; i >= 0; i--) {
+                // count columns in array to print
+                for (int j = i; j >= 0; j--) {
+                    StdOut.print(iterationarray[i][j] + " ");
+                }
+                StdOut.println();
+            }
         }
     }
 
