@@ -1,10 +1,38 @@
 import edu.princeton.cs.introcs.StdOut;
+import edu.princeton.cs.introcs.StdIn;
 
 /**
  * Erik Pettersson, erpette@kth.se
  **/
 
-public class recursivePascal extends ErrorPascal implements Pascal {
+public class fasterrecursivePascal extends ErrorPascal implements Pascal {
+
+    public static void main(String[] args){
+
+        // make able to use and modify direction and arrays properly.
+        recursivePascal recursive = new recursivePascal();
+
+        //ask how many rows to print
+        StdOut.println("How many rows shall be printed");
+        while (!StdIn.isEmpty()) {
+
+            // set row number to print
+            int n = StdIn.readInt();
+
+            //ask what direction to print it
+            StdOut.println("What direction should we print the triangle in?");
+            StdOut.println("true = normal (top down), false = upside down (bottom up)");
+
+            // set print direction
+            recursive.direction = StdIn.readBoolean();
+
+            // set the recursive/iterative arrays to correct size
+            recursive.binom_store = new int[n+1][n+1];
+
+            // call printPascal with our n
+            recursive.printPascal(n);
+        }
+    }
 
     // print direction boolean
     public boolean direction = true;
