@@ -12,6 +12,7 @@ public class ErrorPascal implements Pascal {
         if (n < 0) {
             StdOut.println("Illegal value for n, try again.");
         }
+        return;
     }
 
     public int binom(int n, int k) {

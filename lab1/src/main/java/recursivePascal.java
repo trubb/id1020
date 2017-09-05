@@ -27,6 +27,8 @@ public class recursivePascal extends ErrorPascal implements Pascal {
         if (k == n) {
             binom_store[n][k] = 1; // k == n is the element farthest to the right, it is always 1
             return 1;
+        } else if (k == 1 || k == n -1 ) {
+            return binom_store[n][k] = n;
         } else if (k == 0) {
             binom_store[n][0] = 1; // element farthest to the left, it is always 1
             return 1;
