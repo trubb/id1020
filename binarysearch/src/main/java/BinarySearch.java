@@ -32,12 +32,12 @@ public class BinarySearch {
         System.out.println("hi  = " + hi);
 
         // possible key indices in [lo, hi)
-        if (hi <= lo) return -1;
-        int mid = lo + (hi - lo) / 2;
-        int cmp = a[mid].compareTo(key);
-        if      (cmp > 0) return search(key, a, lo, mid);
-        else if (cmp < 0) return search(key, a, mid+1, hi);
-        else              return mid;
+        if (hi <= lo) return -1; // if hi is smaller than or equal to lo return -1, oops the key wasnt in the array
+        int mid = lo + (hi - lo) / 2; // mid is equal to lo + (hi-lo)/2, choose what to guess at
+        int cmp = a[mid].compareTo(key); // compare mid to the searched value
+        if      (cmp > 0) return search(key, a, lo, mid); // if the comparison returns > 0 search for key in the lower part of the current span of array a
+        else if (cmp < 0) return search(key, a, mid+1, hi); // if the comparison returns 0 < search for key in the upper part of the current span of array a
+        else              return mid; // whe guessed correctly on the first try? wow
     }
 
 
@@ -50,12 +50,12 @@ public class BinarySearch {
         System.err.println("Done reading words");
 
         // sort the words (if needed)
-        Arrays.sort(words);
+        Arrays.sort(words); // built-in magical sorting method
         System.err.println("Done sorting words");
 
         // prompt user to enter a word and check if it's there
         while (!StdIn.isEmpty()) {
-            String key = StdIn.readString();
+            String key = StdIn.readString(); // take in a key, its whatever is input into StdIn
             if (search(key, words) < 0) { // if search returns < 0 key didnt exist in the file
                 StdOut.println(key + " fanns INTE i largeW.txt");
             } else { // if search returns any other value the key exists in the file
