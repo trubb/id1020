@@ -14,14 +14,12 @@ public class BubbleSort {
             for (int i = 0; i < array.length; i++) {
 
                 list.addNode(array[i]);
-
             }
 
             Sort.BubbleSort(list);
 
             StdOut.print(sortedlinkedlist);
         }
-
     }
 
 }
@@ -34,26 +32,24 @@ class Sort {
         //int countSwaps; // for counting Swaps
 
         boolean swapped;
-
-        while (size > 0 && swapped) {
+        // hur hantera att vi behöver listlängd?
+        while (length > 0 && swapped) {
 
             swapped = false;
+            // listlängd här med
+            for (int i = 0; i <= length; i++) {
 
-            for (int i = 0; i <= size; i++) {
-
+                // uppdatera för att vara linkedlist och inte array
                 if ( linkedlist[i] .compareTo( linkedlist[i + 1] ) < 0) {
 
                     swapped = true;
-
-                    List.Swap(i, i + 1);
-
                     //prepare for swap/inversion count
                     //countSwaps++;
 
+                    List.Swap(current, current.next);
                 }
             }
         }
-
     }
 
 }
@@ -65,11 +61,12 @@ class List {
 
         Comparable data = null;
         Node next = null;
-
     }
 
     private Node first;
-    private int length; // ????
+    private int length = 0;
+    // behöver något att checka listlängd mot för sorten
+
 
     public void addNode(Comparable key) {
 
@@ -78,6 +75,7 @@ class List {
         first.data = key;
         first.next = oldfirst;
 
+        this.length++;
     }
 
     static void Swap(Comparable largerkey, Comparable smallerkey) {
@@ -89,3 +87,7 @@ class List {
     }
 
 }
+
+/*class Inversion {
+
+}*/
