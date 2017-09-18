@@ -4,7 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LinkedList list = new LinkedList();
+        LinkedList<Integer> list = new LinkedList<>();
+        int[] inversionarray = null;
 
         // 30 entries for testing
 /*
@@ -46,11 +47,14 @@ public class Main {
 
             int random = (int)(Math.random() * 50 + 1);
             list.addNode(random);
+            inversionarray[i] = random;
+
         }
 
         StdOut.println("List before sorting: " + list.toString());
-        list.bubbleSort();
+        int inversions = list.bubbleSort();
         StdOut.println("List after sorting: " + list.toString());
+        StdOut.println("Number of swapped keys (int inversions) " + inversions);
 
     }
 }

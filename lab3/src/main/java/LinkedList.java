@@ -1,13 +1,11 @@
-import java.util.Objects;
-
 public class LinkedList<T extends Comparable<T>> {
 
-    private Node first;
+    private Node<T> first;
     private int size = 0;
 
     public void addNode(T key) {
 
-        Node n = new Node();
+        Node<T> n = new Node<>();
         Node current = first;
         n.setData(key);
 
@@ -22,27 +20,30 @@ public class LinkedList<T extends Comparable<T>> {
         size++;
     }
 
-    private void swap(Node higher, Node lower) {
-        Node temporary = new Node();
-        temporary.setData(lower.getData());
-        temporary.setNext(lower.getNext());
+    private void swap(Node<T> higher, Node<T> lower) {
+        Node<T> temporary = lower.getNext();
+        //temporary.setData(lower.getData());
+        //temporary.setNext(lower.getNext());
 
         lower.setNext( higher );
-        higher.setNext( temporary.getNext() );
+        higher.setNext( temporary );
     }
 
-    public void bubbleSort() {
+    public int bubbleSort() {
 
         int R = this.size - 1;
         boolean swapped = true;
+        int inversions = 0;
 
         while (R >= 0 && swapped) {
-            swapped = false;
-            Node previous = null;
-            for (Node curr = first; curr != null && curr.getNext() != null;) {
-                Node next = curr.getNext();
 
-                if ( curr.getData().compareTo(next.getData()) > 0 ) {
+            swapped = false;
+            Node<T> previous = null;
+
+            for (Node<T> curr = first; curr != null && curr.getNext() != null; curr = previous.getNext()) {
+                Node<T> next = curr.getNext();
+
+                if ( curr.compareTo(next) > 0 ) {
                     if (previous == null) {
                         first = next;
                     } else {
@@ -51,25 +52,34 @@ public class LinkedList<T extends Comparable<T>> {
 
                     swap(curr, next);
                     swapped = true;
+                    inversions += 1; // increment swap counter
                     previous = next;
                 } else {
                     previous = curr;
-                    curr = next;
                 }
             }
             R--;
         }
+
+        return inversions;
     }
 
     public String toString() {
-        String printlist = "";
-        printlist += "(" + this.first.getData() + ") ";
 
-        Node current = first.getNext();
+        if (this.first == null) {
+            return "()";
+        }
+
+        StringBuilder printlist = new StringBuilder();
+
+        Node current = first;
+
         while (current != null) {
-            printlist += "(" + current.getData() + ") ";
+            printlist.append("(");
+            printlist.append(current.getData());
+            printlist.append(") ");
             current = current.getNext();
         }
-        return printlist;
+        return printlist.toString();
     }
 }

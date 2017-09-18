@@ -2,10 +2,10 @@ public class Node<T extends Comparable<T>> implements Comparable<Node <T>>{
 
     // newly created nodes get their fields set to null
     private T data = null;
-    private Node next = null;
+    private Node<T> next = null;
 
 
-    public Node getNext() {
+    public Node<T> getNext() {
         return this.next;
     }
 
@@ -17,7 +17,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node <T>>{
         return this.data;
     }
 
-    public void setNext(Node nextNode) {
+    public void setNext(Node<T> nextNode) {
         this.next = nextNode;
     }
 
