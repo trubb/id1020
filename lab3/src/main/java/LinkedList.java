@@ -1,7 +1,8 @@
+import java.util.Objects;
+
 public class LinkedList<T extends Comparable<T>> {
 
     private Node first;
-
     private int size = 0;
 
     public void addNode(T key) {
@@ -18,52 +19,43 @@ public class LinkedList<T extends Comparable<T>> {
             }
             current.setNext(n);
         }
-
         size++;
     }
 
-    private void swapTwo(Node higher, Node lower) {
-        Node temporary = lower.getNext();
-        this.first = lower;
-        this.first.setNext(higher);
-        higher.setNext( temporary );
-    }
+    private void swap(Node higher, Node lower) {
+        Node temporary = new Node();
+        temporary.setData(lower.getData());
+        temporary.setNext(lower.getNext());
 
-    private void swapThree(Node first, Node second, Node third) {
-        Node temporary = third.getNext();
-        first.setNext( third );
-        third.setNext( second );
-        second.setNext( temporary );
+        lower.setNext( higher );
+        higher.setNext( temporary.getNext() );
     }
 
     public void bubbleSort() {
 
-        int R = this.size - 2;
-
+        int R = this.size - 1;
         boolean swapped = true;
 
         while (R >= 0 && swapped) {
             swapped = false;
-            int index = 0;
+            Node previous = null;
+            for (Node curr = first; curr != null && curr.getNext() != null;) {
+                Node next = curr.getNext();
 
-            for (Node i = first; i.getNext().getNext() != null; i = i.getNext()) {
-
-                if ( index == 0 ) {
-                    if ( i.getData().compareTo(i.getNext().getData()) > 0 ) {
-
-
-                        swapTwo( i.getNext(), i.getNext().getNext() );
-                        swapped = true;
+                if ( curr.getData().compareTo(next.getData()) > 0 ) {
+                    if (previous == null) {
+                        first = next;
+                    } else {
+                        previous.setNext(next);
                     }
-                }
 
-                System.out.println(i.getNext().getNext().getData());
-
-                if ( i.getNext().getData().compareTo(i.getNext().getNext().getData()) > 0 ) {
-                    swapThree(i, i.getNext(), i.getNext().getNext());
+                    swap(curr, next);
                     swapped = true;
+                    previous = next;
+                } else {
+                    previous = curr;
+                    curr = next;
                 }
-                index++;
             }
             R--;
         }
