@@ -49,7 +49,6 @@ public class Main {
 //        int inversionarray[] = {14,40,3,30,15,41,6,48,49,35,0,42,23,32,11,2,22,4,13,31,10,37,27,36,20,22,33,17,18,7}; // 30
 
 
-
         int numberofkeys = 10; // int used to set number of elements in array and list
         int[] inversionarray = new int[numberofkeys]; // initialise inversionarray to be of proper size for adding keys automatically
         for (int i = 0; i < numberofkeys; i++) {

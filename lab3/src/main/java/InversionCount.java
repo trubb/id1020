@@ -5,7 +5,7 @@ public class InversionCount {
     /**
      * A mergesort implementation to count the number of inversions in the list
      * The array contains the same values as the linked list
-     * 
+     *
      * @param array the original array
      * @param left the left half of the original array
      * @param right the right half of the original array
@@ -48,7 +48,7 @@ public class InversionCount {
         int left[] = Arrays.copyOfRange(array, 0, mid); // left array is left half of the original array
         int right[] = Arrays.copyOfRange(array, mid, array.length); // right array is right half of the original array
 
-        // return the inversion count of the mergesorted array through recursive calls
+        // sort the provided array through the magic of recursive calls and return
         return inversions(left) + inversions(right) + merge(array, left, right);
     }
 

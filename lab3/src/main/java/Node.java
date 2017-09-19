@@ -47,7 +47,6 @@ public class Node<T extends Comparable<T>> implements Comparable<Node <T>>{
      * @return 1 if the executing nodes data is larger, 0 if they have the same value, or -1 if the compared node is larger
      */
     public int compareTo(Node<T> comparable) {
-        System.out.println(this.getData().compareTo( comparable.getData() ));
         return this.getData().compareTo( comparable.getData() );
     }
 }

@@ -40,20 +40,25 @@ public class LinkedList<T extends Comparable<T>> {
     /**
      * Performs a bubble sort on the linked list, so that it is ordered from smallest to largest
      *
+     * Since we use a for loop in a while loop this should end up somewhere around ~N^2 time complexity, which is that of bubble sort
+     *
      * @return the number of times swap() has been called
      */
     public int bubbleSort() {
 
-        int R = this.size - 1; // in order to not overstep the end of the list, set R to 1 less than size
+        int R = this.size - 1; // in order to not overstep the end of the list, set R to 1 less than size so that when we compare to the 2nd last elements next we do not get a null pointer error
         boolean swapped = true; // create a boolean to toggle when we swap
         int swaps = 0; // this int is used to count the amount of swaps that we perform
 
-        while (R >= 0 && swapped) { // as long as R is above or equal to 0, and swapped is true do the following
+        // as long as R is above or equal to 0, and swapped is true do the following
+        while (R >= 0 && swapped) { // done ~N times since we start at size-1 and continue until we either have nothing to sort or R < 0
 
             swapped = false; // this will break the while loop when we are done swapping stuff
             Node<T> previous = null; // create a new node to hold the value of the previous node, null for now
 
-            // create yet another new node, as long as it is not null and the next node is not null, step through
+            /* create yet another new node, as long as it is not null and the next node is not null, step through
+               done ~N times since we step through the list from the first element to the last
+               Leading to what hopefully is ~N^2 time complexity*/
             for (Node<T> curr = first; curr != null && curr.getNext() != null; curr = previous.getNext()) {
 
                 Node<T> next = curr.getNext(); // create and set the next-node to be the node after current-node
@@ -83,6 +88,10 @@ public class LinkedList<T extends Comparable<T>> {
      *
      * MUST be used before bubbleSort() or there will be no inversions to count
      *
+     * Since we have a while loop in a while loop we should end up with ~N^2 time complexity.
+     * A better implementation would be to use merge sort, since divide and conquer algorithms
+     * tend to have a time complexity of n log n.
+     *
      * @return the number of inversions in the provided list
      */
     public int inversions() {
@@ -90,11 +99,11 @@ public class LinkedList<T extends Comparable<T>> {
         int inversions = 0; // create int to store the amount of inversions
         Node current = this.first; // create a new node current
 
-        while (current != null) { // as long as current node exists do the following
+        while (current != null) { // as long as current node exists do the following, runs ~N times as we start at first node
 
             Node inner = current.getNext(); // create a new node, inner, and set it to be the node following current-node
 
-            while (inner != null) { // as long as inner node exists do the following
+            while (inner != null) { // as long as inner node exists do the following, runs ~N times as inner starts at the 2nd node
 
                 if ( inner.getData().compareTo(current.getData()) < 0 ) { // if the data field of inner-node is greater than that of the current
 
