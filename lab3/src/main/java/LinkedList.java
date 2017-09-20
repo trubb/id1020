@@ -58,7 +58,7 @@ public class LinkedList<T extends Comparable<T>> {
 
             /* create yet another new node, as long as it is not null and the next node is not null, step through
                done ~N times since we step through the list from the first element to the last
-               Leading to what hopefully is ~N^2 time complexity*/
+               Leading to what should be ~N^2 time complexity since we will perform N comparisons for ever node*/
             for (Node<T> curr = first; curr != null && curr.getNext() != null; curr = previous.getNext()) {
 
                 Node<T> next = curr.getNext(); // create and set the next-node to be the node after current-node
@@ -78,7 +78,7 @@ public class LinkedList<T extends Comparable<T>> {
                     previous = curr; // else set previous to current
                 }
             }
-            R--; // decrement R (where we are in the list)
+            R--; // decrement R (size of list remaining to go through)
         }
         return swaps; // return the number of swaps
     }
