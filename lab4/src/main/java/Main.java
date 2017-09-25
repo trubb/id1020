@@ -30,7 +30,7 @@ public class Main {
         StdOut.println("Det finns " + String.valueOf(trie.count(testWord)) +
                 " ord i texten som börjar med: " + testWord);
 
-        IterateTrie it = trie.iterator(testWord);
+        Trieiterator it = trie.iterator(testWord);
         Entry<String, Integer> kv = null;
 
         while (it.hasNext()) {

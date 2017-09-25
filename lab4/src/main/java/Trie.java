@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Trie {
 
-    private Node root = new Node('\0');
+    private Node root = new Node('\0'); // \0 since we need to feed the char something
 
     /**
      * @return the root
@@ -36,7 +36,7 @@ public class Trie {
             current = current.getChild(c); // change current to be it's child so we can add a child to the child
         }
 
-        current.increment(); // add to the value of the node
+        current.increment(); // increment the associated value
     }
 
     /**
@@ -65,8 +65,8 @@ public class Trie {
 
     /** if we would happen to make a call to distinct() with a string, this saves our bacon
      */
-    public int distinct(String k)
-    {
+    public int distinct(String k) {
+
         return this.distinct(k.toCharArray());
     }
 
@@ -91,10 +91,7 @@ public class Trie {
 
         ArrayList<Node> children = current.getChildren(); // create an arraylist for the children
 
-        // if there are children, increment the counter
-        /**
-         * CHECK THIS PLEASE
-         */
+        // add the number of children to the counter
         if (children != null) {
             count += num_of_children(children);
         }
@@ -103,18 +100,20 @@ public class Trie {
     }
 
     /**
-     * Calls IterateTrie.java and thereby creates a new
+     * Calls Trieiterator.java and thereby creates a new
      * iterator for the sought after purpose
      * @param prefix
      * @return the created iterator
      */
-    public IterateTrie iterator(String prefix) {
-        return new IterateTrie(prefix, this);
+    public Trieiterator iterator(String prefix) {
+
+        return new Trieiterator(prefix, this);
     }
 
     /** if we would happen to make a call to count() with a string, this saves our bacon
      */
     public int count(String key) {
+
         return this.count(key.toCharArray());
     }
 
@@ -147,11 +146,12 @@ public class Trie {
     /** if we would happen to make a call to dig() with a string, this saves our bacon
      */
     public Node dig(String key) {
+
         return this.dig(key.toCharArray());
     }
 
     /**
-     * Digs down in the trie to check if there are children of a node
+     * Digs down in the trie to find the node that corresponds to the last character in the key
      * @param key the sought after key
      * @return return a node
      */
@@ -164,11 +164,11 @@ public class Trie {
             current = current.getChild(c); // set current to be the child of the original current (1 step down)
 
             if (current == null) {
-                return null; // if there is no child (getChild sets current to null) return null
+                return null; // if there is no child (if getChild sets current to null) return null
             }
         }
 
-        return current;
+        return current; // when we've come to the end of the key, return the current node
     }
 
     /**
