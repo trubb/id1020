@@ -47,7 +47,7 @@ class Node implements Comparable<Node> {
     }
 
     /**
-     * A method for checking if there are any children of a node
+     * A method for checking if there are any children of a node with a letter
      * @param letter the value in a node we want to check if it has children
      * @return true/false depending on if there are any
      */
@@ -62,17 +62,18 @@ class Node implements Comparable<Node> {
 
     /**
      * A method for adding a child to the node
+     * Will not insert a new node if the letter exists
      * @param letter the character that we want to store in the node
      */
     public void addChild(char letter) {
 
-        if (this.hasChild(letter)) {
+        if (this.hasChild(letter)) { // if there is such a node (containing letter) then do not add a node
             return;
         }
         Node n = new Node(letter); // create a new node containing a character
         n.setParent(this); // set it's parent to the current node
         this.children.add(n); // append the child to the arraylist
-        Collections.sort(children); // sort the list into ascending order
+        Collections.sort(children); // sort the list into ascending order (a-z)
     }
 /*
     public void removeChild(char e) {
@@ -199,26 +200,26 @@ class Node implements Comparable<Node> {
     /**
      * A method for finding the child with a sought after key by binary search!
      * @param key the key we are looking for
-     * @param lo 0, the lower bound of the search
-     * @param hi the length of the arraylist
+     * @param low 0, the lower bound of the search
+     * @param high the length of the arraylist
      * @return the sought after key
      */
-    private int search(Character key, int lo, int hi) {
+    private int search(Character key, int low, int high) {
 
         while (true) {
 
-            if (hi <= lo) { // if the upper and lower bounds converge, oops, cant find that key
+            if (high <= low) { // if the upper and lower bounds converge, oops, cant find that key
                 return -1;
             }
 
-            int mid = lo + (hi - lo)/2;
+            int mid = low + (high - low)/2;
 
             int cmp = this.children.get(mid).compareTo(key); // compare the child matching mid to key
 
-            if (cmp > 0) { // if the comparison yields a result >0, set hi to mid and continue looking
-                hi = mid; // in the lower half of the previous search area
+            if (cmp > 0) { // if the comparison yields a result >0, set high to mid and continue looking
+                high = mid; // in the lower half of the previous search area
             } else if (cmp < 0) { // if the comparison yields a result <0 set low to and continue looking
-                lo = mid + 1; // in the upper half of the previous search area
+                low = mid + 1; // in the upper half of the previous search area
             } else {
                 return mid;
             }

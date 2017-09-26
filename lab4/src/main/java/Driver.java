@@ -39,6 +39,9 @@ public class Driver {
             }
         }
 
+        System.out.println("Distinct: ");
+        System.out.println(drivertrie.distinct("x"));
+
         System.out.println(""); // give the printing below some headroom
 
         commonFirstLetter(drivertrie); // figure out what first letters are most common

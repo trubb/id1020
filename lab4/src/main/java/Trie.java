@@ -18,7 +18,7 @@ public class Trie {
      */
     public void put(String key) {
 
-        this.put(key.toCharArray());
+        this.put(key.toCharArray()); // changes the key into a char array (splits the key)
     }
 
     /**
@@ -36,7 +36,7 @@ public class Trie {
             current = current.getChild(c); // change current to be it's child so we can add a child to the child
         }
 
-        current.increment(); // increment the associated value
+        current.increment(); // increment the associated value for every time we insert a letter
     }
 
     /**
@@ -63,6 +63,18 @@ public class Trie {
         }
     }
 
+    /**
+     * Calls Trieiterator.java and thereby creates a new
+     * iterator for the sought after purpose
+     * @param prefix
+     * @return the created iterator
+     */
+    public Trieiterator iterator(String prefix) {
+
+        return new Trieiterator(prefix, this);
+    }
+
+
     /** if we would happen to make a call to distinct() with a string, this saves our bacon
      */
     public int distinct(String k) {
@@ -79,36 +91,26 @@ public class Trie {
     public int distinct(char[] key) {
 
         Node current = dig(key); // retrieve the node
-        int count = 0;
+        int distinct = 0;
 
         if (current == null) { // if there is no such node return 0
             return 0;
         }
 
-        if (current.getValue() > 0) { // if the returned value is above zero, add 1 to count
-            count += 1;
+        if (current.getValue() > 0) { // if the returned value is above zero, add 1 to distinct
+            distinct += 1;
         }
 
         ArrayList<Node> children = current.getChildren(); // create an arraylist for the children
 
         // add the number of children to the counter
         if (children != null) {
-            count += num_of_children(children);
+            distinct += num_of_children(children);
         }
 
-        return count;
+        return distinct;
     }
 
-    /**
-     * Calls Trieiterator.java and thereby creates a new
-     * iterator for the sought after purpose
-     * @param prefix
-     * @return the created iterator
-     */
-    public Trieiterator iterator(String prefix) {
-
-        return new Trieiterator(prefix, this);
-    }
 
     /** if we would happen to make a call to count() with a string, this saves our bacon
      */
@@ -132,7 +134,7 @@ public class Trie {
 
         int count = 0;
 
-        count += current.getValue(); // add current value to counter
+        count += current.getValue(); // put current value to counter
 
         ArrayList<Node> children = current.getChildren(); // create an arraylist for the children
 

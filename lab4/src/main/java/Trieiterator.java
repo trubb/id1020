@@ -48,7 +48,7 @@ class Trieiterator implements Iterator<Entry<String, Integer>> {
     }
 
     /**
-     * Get a word
+     *
      * @param key
      * @return
      */
@@ -60,8 +60,8 @@ class Trieiterator implements Iterator<Entry<String, Integer>> {
             return null;
         }
 
-        // if the node we compare to is larger than the current, or if the node is empty
-        if (current.compareTo(node.word()) < 0 && node.getValue() != '\0') {
+        // if the node we compare to is larger than the string current, return the node
+        if (current.compareTo(node.word()) < 0) {
             return node;
         }
 
@@ -109,7 +109,7 @@ class Trieiterator implements Iterator<Entry<String, Integer>> {
         Entry<String, Integer> returnentry = null; // create a key value pair
         Node curr = this.getWord(this.prefix); // create a node to work with, set it to be
 
-        current = curr.word(); // set the string current to be the
+        current = curr.word(); // set the string current to be the word created when climbing towards the node
 
         if (curr != null) {
             returnentry = new SimpleEntry<String, Integer>( current, curr.getValue() );
