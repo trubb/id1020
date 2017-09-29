@@ -1,9 +1,9 @@
 public class Flag {
 
-    public boolean f = false;
+    public boolean flag = false;
 
     public Flag(boolean b) {
-        this.f = b;
+        this.flag = b;
     }
 
 }
