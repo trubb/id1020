@@ -5,6 +5,7 @@ import se.kth.id1020.util.Word;
 import se.kth.id1020.util.Attributes;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -53,6 +54,7 @@ public class TinySearchEngine implements TinySearchEngineBase {
             f.flag = false; // and set the flag to false again
 
 //            System.out.println("wordnodes[i]: " + wordnodes.get(i).getWordContent()); // debug message
+
         } else {
             /* .add(int i,E element) is safe to do since it splits the list, inserts
              *  the new element, and then attaches the right part of the list to the left
@@ -72,11 +74,18 @@ public class TinySearchEngine implements TinySearchEngineBase {
     @Override
     public List<Document> search(String query) {
 
+        ArrayList<Document> documents = new ArrayList<>();
+        HashSet<Document> documentHashSet = new HashSet<>();
+
         int i = BinarySearch.binarysearch(wordnodes, query); // find the sought after word in the index
 
-        while (true) { // until we are done do:
+        if (i == -1 ) {
 
-            ArrayList<Document> documents = new ArrayList<>();
+            System.out.println("\"" + query + "\" was not found within the index.\nPlease try again");
+            return null;
+        }
+
+        while (true) { // until we are done do:
 
 //            System.out.println("i: "+ i + " sizeof wordnodes " + wordnodes.size()); // debug message
 
@@ -87,9 +96,12 @@ public class TinySearchEngine implements TinySearchEngineBase {
             * */
             for (int j = 0; j < wordnodes.get(i).attributes.size(); j++) { //
 
-                documents.add(wordnodes.get(i).getDocument(j));
-
+                // put the list of documents into the hashset thereby ensuring all duplicates are removed
+                documentHashSet.add(wordnodes.get(i).getDocument(j));
             }
+
+            documents.addAll(documentHashSet); // insert the hashset into the arraylist
+
             return documents;
         }
     }
