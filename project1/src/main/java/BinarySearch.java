@@ -15,6 +15,7 @@ public class BinarySearch extends TinySearchEngine { // extends due to a really 
 
     /**
      * A binary search for finding the correct position in the provided arraylist to insert a given node
+     * Not the same as the implementation for making queries due to me being severely spooked by their slight differences
      * @param key the string content of a Word that we are looking to insert into the arraylist
      * @param arrl an array list that we want to insert the node into
      * @param low lower bound of the search, starting at 0
@@ -56,6 +57,7 @@ public class BinarySearch extends TinySearchEngine { // extends due to a really 
 
     /**
      * A binary search for finding indices that match the sought after string
+     * Not the same as the implementation for inserting into the index due to me being severely spooked by their slight differences
      * @param key the string that we are looking for among the documents
      * @param arrl the index arraylist
      * @param low the lower bound of the search, starting at 0
